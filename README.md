@@ -36,11 +36,11 @@ processing time is dependent on the size of the image and the size of the kernel
 
 Step 1 - Load the input image, extract all the color channels (red, green, blue) of the image:
 ```python
-    img = Image.open(input_image)
-    input_array = np.array(img)
-    red_channel = input_array[:, :, 0].copy()
-    green_channel = input_array[:, :, 1].copy()
-    blue_channel = input_array[:, :, 2].copy()
+img = Image.open(input_image)
+input_array = np.array(img)
+red_channel = input_array[:, :, 0].copy()
+green_channel = input_array[:, :, 1].copy()
+blue_channel = input_array[:, :, 2].copy()
 ```
 
 Step 2 - Select the size of the kernel, then use the formula of a Gaussian function to generate the matrix kernel. In
