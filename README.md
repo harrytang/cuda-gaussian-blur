@@ -1,8 +1,11 @@
 CUDA Gaussian Blur
 ==================
 LUT university
+
 BM40A1400_07.01.2019 GPGPU Computing
+
 Author: Gia Duy DUONG
+
 Teacher: Aleksandr Bibov
 
 Introduction
@@ -34,11 +37,39 @@ processing time is dependent on the size of the image and the size of the kernel
 Step 1 - Load the input image, extract all the color channels (red, green, blue) of the image.
 
 Step 2 - Select the size of the kernel, then use the formula of a Gaussian function to generate the matrix kernel. In
-this sample source code, the size of the kernel is 5x5
+this sample source code, the size of the kernel is 5x5.
 
 Step 3 - Convolution of image with kernel. If the image has 3 color channels, we process all the individual color
 channel separately by multiple the pixel value of every pixel corresponding to its location in the convolution kernel.
-Save the result in the output arrays.
+Since we want to use GPU, we write the corresponding CUDA C code which save in `gaussian_blur.cu` file, Then we transfer
+the data from the host to the device, after the process is done, fetch the data back from the GPU. Here is the CUDA code:
+```cu
+__global__ void applyFilter(const unsigned char *input, unsigned char *output, const unsigned int width, const unsigned int height, const float *kernel, const unsigned int kernelWidth) {
+
+    const unsigned int col = threadIdx.x + blockIdx.x * blockDim.x;
+    const unsigned int row = threadIdx.y + blockIdx.y * blockDim.y;
+
+    if(row < height && col < width) {
+        const int half = kernelWidth / 2;
+        float blur = 0.0;
+        for(int i = -half; i <= half; i++) {
+            for(int j = -half; j <= half; j++) {
+
+                const unsigned int y = max(0, min(height - 1, row + i));
+                const unsigned int x = max(0, min(width - 1, col + j));
+
+                const float w = kernel[(j + half) + (i + half) * kernelWidth];
+                blur += w * input[x + y * width];
+            }
+        }
+        output[col + row * width] = static_cast<unsigned char>(blur);
+    }
+}
+```
+The CUDA function takes the individual color channel, width & height of the image, and the Gaussian Kernel as the input
+params, then produce result as the color channel which we will use for saving the result image in the next step. 
+
+ 
 
 Step 4 - Merge all the output arrays (red, green, blue) and save as an output result image which is already blurred.
 
