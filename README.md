@@ -123,6 +123,10 @@ Testing
 On my testing device with a GeForce GTX 970M Dedicated Graphics, it only take 0.04s to blur an full HD image, and 0.13s
 for a 4K image. That is an amazing result.
 
+![alt text][testing-result-img]
+
+[testing-result-img]: https://github.com/harrytang/cuda-gaussian-blur/blob/master/testing-result.png?raw=true "Testing Result"
+
 References
 ----------
 * https://www.youtube.com/watch?v=7LW_75E3A1Q
