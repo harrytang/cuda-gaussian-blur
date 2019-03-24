@@ -27,7 +27,8 @@ configure some software:
 * CUDA Toolkit 10.1
 * Visual Studio 2017 with C++ compiler
 
-More info please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
+Please also make sure the Python, CUDA and Visual C++ compiler directories are in your system execution PATH, more info
+please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
 
 Implementation
 --------------
@@ -120,7 +121,7 @@ will take test.tif as the input image, and then save the blurred image in result
 Testing
 -------
 
-On my testing device with a GeForce GTX 970M Dedicated Graphics, it only take 0.04s to blur an full HD image, and 0.13s
+On my testing device with a GeForce GTX 970M Dedicated Graphics, it only take ~0.05s to blur an full HD image, and ~0.14s
 for a 4K image. That is an amazing result.
 
 ![alt text][testing-result-img]
