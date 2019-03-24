@@ -1,17 +1,30 @@
 CUDA Gaussian Blur
 ==================
+LUT university
+BM40A1400_07.01.2019 GPGPU Computing
+Author: Gia Duy DUONG
+Teacher: Aleksandr Bibov
 
 Introduction
 ------------
-CUDA is a parallel computing platform and application programming interface model created by Nvidia. 
-In this report, I will show the Gaussian Blur algorithm along with the implementation in PyCUDA. 
+CUDA is a parallel computing platform and application programming interface model created by NVIDIA. It is recommended
+for most deep learning purposes. Training new models will be faster on a GPU computer than a normal computer without GPU,
+because GPU processes the tasks parallelly.
+
+In this report, I will show the Gaussian Blur algorithm along with the implementation in PyCUDA. Gaussian Blur is widely
+used effect in many graphics software, including Photoshop, Google Photos.  
 
 Prerequisites
 -------------
 To complete this implementation, you will need a computer with a CUDA-capable GPU. You also need to install and
 configure some software:
+* Python 3.7
+* PyCUDA v2018.1.1
+* NumPy 1.6.2
+* CUDA Toolkit 10.1
+* Visual Studio 2017 with C++ compiler
 
-- more info please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
+More info please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
 
 Implementation
 --------------
@@ -31,8 +44,18 @@ Step 4 - Merge all the output arrays (red, green, blue) and save as an output re
 
 Usage
 -----
+In the Python commandline, run the follow command:
+
+`main.py input_image output_img`
+
+For example:
 
 `python main.py test.tif result.tif`
 
-Conclusion
-----------
+will take test.tif as the input image, and then save the blurred image in result.tif
+ 
+Testing
+-------
+
+On my testing device with a GeForce GTX 970M Dedicated Graphics, it only take 0.04s to blur an full HD image, and 0.13s
+for a 4K image. That is an amazing result.

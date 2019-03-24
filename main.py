@@ -16,11 +16,6 @@ import sys
 import timeit
 from PIL import Image
 
-# ########## #
-# begin time #
-# ########## #
-time_started = timeit.default_timer()
-
 # ############### #
 # check arguments #
 # ############### #
@@ -79,6 +74,8 @@ apply_filter = mod.get_function('applyFilter')
 # ##################
 # apply the  filter
 # ##################
+# start time
+time_started = timeit.default_timer()
 for channel in (red_channel, green_channel, blue_channel):
     apply_filter(
         drv.In(channel),
@@ -90,6 +87,9 @@ for channel in (red_channel, green_channel, blue_channel):
         block=(dim_block, dim_block, 1),
         grid=(dim_grid_x, dim_grid_y)
     )
+# end time
+time_ended = timeit.default_timer()
+
 
 # ####################################################################### #
 # create the output array with the same shape and type as the input array #
@@ -101,9 +101,6 @@ output_array[:, :, 2] = blue_channel
 
 # save result image
 Image.fromarray(output_array).save(output_image)
-
-# end time
-time_ended = timeit.default_timer()
 
 # display total time
 print('Total processing time: ', time_ended - time_started, 's')
