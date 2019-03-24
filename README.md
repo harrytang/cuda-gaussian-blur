@@ -9,7 +9,9 @@ In this report, I will show the Gaussian Blur algorithm along with the implement
 Prerequisites
 -------------
 To complete this implementation, you will need a computer with a CUDA-capable GPU. You also need to install and
-configure some software, more info please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
+configure some software:
+
+- more info please see https://documen.tician.de/pycuda/ and https://developer.nvidia.com/cuda-zone
 
 Implementation
 --------------
